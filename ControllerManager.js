@@ -1,4 +1,4 @@
-exports.ControllerManager = (function () {
+var controllermanager = (function () {
     function controllermanager(game, parent) {
         this.hasPreUpdate = true;
         this.hasPostRender = false;
@@ -100,6 +100,11 @@ exports.ControllerManager = (function () {
         });
         if (!hasMapped)
             this.controllers.push({ pad: e.gamepad, map: this.mappings[0] });
+    };
+    controllermanager.prototype.vibrate = function (miliseconds) {
+        if ("vibrate" in navigator) {
+            window.navigator.vibrate(miliseconds);
+        }
     };
     controllermanager.prototype.removeGamepad = function (e) {
         var valueToDelete;
